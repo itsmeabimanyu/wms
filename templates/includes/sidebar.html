@@ -1,0 +1,13 @@
+<div class="az-content-left az-content-left-components">
+    <div class="component-item">
+    {% for section in menu_sections %}
+        <label>{{ section.label }}</label>
+        <nav class="nav flex-column">
+            {% for item in section.items %}
+                <a href="{{ item.url }}" class="nav-link">{{ item.name }}</a>
+            {% endfor %}
+        </nav>
+    {% endfor %}
+    </div><!-- component-item -->
+
+</div><!-- az-content-left -->
