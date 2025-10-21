@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.views.generic import (
     TemplateView
 )
+from .forms import (
+    WarehouseForm
+)
 
 # Create your views here.
 class Dashboard(TemplateView):
@@ -51,12 +54,30 @@ class Warehouse(TemplateView):
             {
                 "label": "Warehouse",
                 "items": [
-                    {"name": "Warehouse Location", "url": "elem-icons.html"},
-                    {"name": "Storage Location", "url": "elem-buttons.html"},
-                    {"name": "Bin Location", "url": "elem-dropdown.html"},
+                    {"name": "Warehouse Location", "url": "warehouseview"},
                 ],
             },
         ]
+
+        context['menu_sections'] = menu_sections
+
+        return context
+    
+class CreateWarehouse(TemplateView):
+    template_name = 'pages/create.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        menu_sections = [
+            {
+                "label": "Warehouse",
+                "items": [
+                    {"name": "Warehouse Location", "url": "warehouseview"},
+                ],
+            },
+        ]
+
+        context['form'] = WarehouseForm
 
         context['menu_sections'] = menu_sections
 

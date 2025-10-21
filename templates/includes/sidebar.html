@@ -4,7 +4,7 @@
         <label>{{ section.label }}</label>
         <nav class="nav flex-column">
             {% for item in section.items %}
-                <a href="{{ item.url }}" class="nav-link">{{ item.name }}</a>
+                <a href="{% url item.url %}" class="nav-link">{{ item.name }}</a>
             {% endfor %}
         </nav>
     {% endfor %}

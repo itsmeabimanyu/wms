@@ -5,7 +5,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', lambda request: redirect('dashboard')),
+    path('', lambda request: redirect('warehouse')),
     path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('warehouse/', views.Warehouse.as_view(), name='warehouse'),
+    path('warehouse/view', views.CreateWarehouse.as_view(), name='warehouseview'),
 ]
