@@ -52,9 +52,9 @@ class Warehouse(TemplateView):
         context = super().get_context_data(**kwargs)
         menu_sections = [
             {
-                "label": "Warehouse",
+                "label": "Inventory",
                 "items": [
-                    {"name": "Warehouse Location", "url": "warehouseview"},
+                    {"name": "Warehouse", "url": "warehouseview"},
                 ],
             },
         ]
@@ -70,9 +70,9 @@ class CreateWarehouse(TemplateView):
         context = super().get_context_data(**kwargs)
         menu_sections = [
             {
-                "label": "Warehouse",
+                "label": "Inventory",
                 "items": [
-                    {"name": "Warehouse Location", "url": "warehouseview"},
+                    {"name": "Warehouse", "url": "warehouseview"},
                 ],
             },
         ]

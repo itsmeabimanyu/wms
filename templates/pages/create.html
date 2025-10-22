@@ -2,13 +2,31 @@
 {% load static %}
 
 {% block content %}
+
 <div class="az-content-body pd-lg-l-40 d-flex flex-column">
     <div class="az-content-breadcrumb">
-        <span>Components</span>
-        <span>Forms</span>
-        <span>Form Elements</span>
+        <span>Inventory</span>
+        <span>Warehouse</span>
+        <span>Manage Warehouses</span>
     </div>
-    <h2 class="az-content-title">Form Elements</h2>
+    <h2 class="az-content-title">Manage Warehouses</h2>
+    <div class="az-dashboard-nav"> 
+        <nav class="nav">
+            <a class="nav-link active" data-toggle="tab" href="#">Warehouses</a>
+            <a class="nav-link" data-toggle="tab" href="#">Warehouses</a>
+        </nav>
+
+        <nav class="nav">
+            <a class="nav-link" href="#"><i class="far fa-save"></i> Save</a>
+            <a class="nav-link" href="#"><i class="far fa-edit"></i> Edit</a>
+            <a class="nav-link" href="#"><i class="far fa-copy"></i> Copy</a>
+            <a class="nav-link" href="#"><i class="far fa-file-alt"></i> View</a>
+
+            <!-- <a class="nav-link" href="#"><i class="far fa-file-pdf"></i> Export to PDF</a>
+            <a class="nav-link" href="#"><i class="far fa-envelope"></i>Send to Email</a> -->
+            <a class="nav-link" href="#"><i class="fas fa-ellipsis-h"></i></a> 
+        </nav> 
+    </div>
 
     <div class="az-content-label mg-b-5">Form Input &amp; Textarea</div>
     <p class="mg-b-20">A basic form control input and textarea with disabled and readonly mode.</p>
@@ -17,15 +35,23 @@
         <div class="col-lg ">
             <div class="card card-dashboard-twelve">
                 
+                
                 <div class="card-header d-flex align-items-center">
                     <div>
                         <!-- <h6 class="card-title">Website Audience Metrics</h6>
                         <p class="card-text">Audience to which the users belonged while on the current date range.</p> -->
+                        
                     </div>
-                    <div class="btn-group ml-auto">
+                    <!-- <div class="btn-group ml-auto">
                         <button class="btn btn-info">Save</button>
                         <button class="btn btn-light">Cancel</button>
-                    </div> 
+                    </div> -->
+                    <div class="btn-group ml-auto">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
                 </div>
                 <div class="card-body">
                     <!-- <div class="card-body-top">
