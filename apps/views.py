@@ -6,6 +6,10 @@ from .forms import (
     WarehouseForm
 )
 
+from .models import (
+    Warehouse
+)
+
 # Create your views here.
 class Dashboard(TemplateView):
     template_name = 'layouts/base.html'
@@ -45,7 +49,7 @@ class Dashboard(TemplateView):
 
         return context
 
-class Warehouse(TemplateView):
+class ViewWarehouse(TemplateView):
     template_name = 'pages/summary.html'
 
     def get_context_data(self, **kwargs):
@@ -77,10 +81,36 @@ class CreateWarehouse(TemplateView):
             },
         ]
 
-        context['form'] = WarehouseForm
         context['menu_sections'] = menu_sections
+        context['items'] = Warehouse.objects.all()
+
+        # Ambil keyword dari query string (?search=...)
+        search_query = self.request.GET.get('search')
+        context['form'] = WarehouseForm
+        if search_query:
+            try:
+                obj = Warehouse.objects.get(code=search_query)  # ganti 'kode' sesuai field kamu
+                context['form'] = WarehouseForm(instance=obj)
+            except Warehouse.DoesNotExist:
+                context['form'] = WarehouseForm()
+                context['error'] = "Data tidak ditemukan."
+        else:
+            context['form'] = WarehouseForm()
+
+        # Query dasar
+        queryset = Warehouse.objects.all()
+
+        # Kalau ada input search, filter berdasarkan field tertentu
+        """if search_query:
+            queryset = queryset.filter(
+                Warehouse.Q(code__icontains=search_query) |
+                Warehouse.Q(name__icontains=search_query) |
+                Warehouse.Q(address__icontains=search_query)
+            )"""
+
+        context['search_query'] = search_query  # biar bisa ditampilkan ulang di input search
+
         context['navlink'] = f"""
-            
             <button type="submit" name="action" value="save" class="nav-link btn btn-link text-info">
                 <i class="far fa-save"></i> Save
             </button>
@@ -94,7 +124,6 @@ class CreateWarehouse(TemplateView):
                 <i class="far fa-copy"></i> View
             </button>
         """
-
         return context
     
     def post(self, request, *args, **kwargs):

@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
+{% load static custom_filters %}
 
 {% block content %}
 
@@ -11,7 +11,6 @@
     </div>
     <h2 class="az-content-title">Manage Warehouses</h2>
 
-    <form method="post">
         {% csrf_token %}
         <div class="az-dashboard-nav"> 
             <nav class="nav">
@@ -30,27 +29,29 @@
         <!-- <div class="az-content-label mg-b-5">Form Input &amp; Textarea</div>
         <p class="mg-b-20">A basic form control input and textarea with disabled and readonly mode.</p> -->
 
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content">
             <div class="tab-pane fade show active" id="tab1" >
                 <div class="row row-sm">
                     <div class="col-lg ">
                         <div class="card card-dashboard-twelve">
                             <div class="card-header d-flex align-items-center">
                                 <div>
-                                    <!-- <h6 class="card-title">Website Audience Metrics</h6>
-                                    <p class="card-text">Audience to which the users belonged while on the current date range.</p> -->
-                                    
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+               
+              </div>
                                 </div>
                                 <!-- <div class="btn-group ml-auto">
                                     <button class="btn btn-info">Save</button>
                                     <button class="btn btn-light">Cancel</button>
                                 </div> -->
+                                <form method="GET" action="">
                                 <div class="btn-group ml-auto">
-                                    <input type="text" class="form-control" placeholder="Search for...">
+                                    <input type="text" class="form-control" name="search" value="{{ search_query }}" placeholder="Search for...">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
+                            </form>
                             </div>
                             <div class="card-body">
                                 {{ form.as_p }}
@@ -86,43 +87,22 @@
                                     <table class="table table-striped mg-b-0">
                                     <thead>
                                         <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Salary</th>
+                                        {% for field in form %}
+                                            <th>{{ field.label }}</th>
+                                        {% endfor %}
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- ListView -->
+                                        {% for item in items %}
                                         <tr>
-                                        <th scope="row">1</th>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>$320,800</td>
+                                            {% for field in form %}
+                                                <td>{{ item|get_field_value:field.name|safe }}</td>
+                                            {% endfor %}
+                                            </td>
                                         </tr>
-                                        <tr>
-                                        <th scope="row">2</th>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">3</th>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>$86,000</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">4</th>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>$433,060</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">5</th>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>$162,700</td>
-                                        </tr>
+                                        {% endfor %}
+                                        <!-- End ListView -->
                                     </tbody>
                                     </table>
                                 </div>
@@ -132,7 +112,6 @@
                 </div>
             </div>
         </div>
-    </form>
 </div>
 
 {% endblock content %}
