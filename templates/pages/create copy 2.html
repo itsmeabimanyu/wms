@@ -1,0 +1,130 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="az-content-body pd-lg-l-40 d-flex flex-column">
+    <div class="az-content-breadcrumb">
+        <span>Inventory</span>
+        <span>Warehouse</span>
+        <span>Manage Warehouses</span>
+    </div>
+    <h2 class="az-content-title">Manage Warehouses</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="az-dashboard-nav"> 
+            <nav class="nav">
+                <a class="nav-link active" data-toggle="tab" href="#">Warehouses</a>
+                <a class="nav-link" data-toggle="tab" href="#">Warehouses</a>
+            </nav>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <!-- Tab 1 -->
+                <li class="nav-item">
+                    <a class="nav-link active"
+                    id="home-tab"
+                    data-toggle="tab"
+                    href="#home"
+                    role="tab"
+                    aria-controls="home"
+                    aria-selected="true">
+                    <i class="far fa-home"></i> Home
+                    </a>
+                </li>
+
+            <!-- Tab 2 -->
+            <li class="nav-item">
+                <a class="nav-link"
+                id="profile-tab"
+                data-toggle="tab"
+                href="#profile"
+                role="tab"
+                aria-controls="profile"
+                aria-selected="false">
+                <i class="far fa-user"></i> Profile
+                </a>
+            </li>
+            </ul>
+
+
+
+            <nav class="nav">
+                {{ navlink|safe }}
+                <!-- <a class="nav-link" href="#"><i class="far fa-file-pdf"></i> Export to PDF</a>
+                <a class="nav-link" href="#"><i class="far fa-envelope"></i>Send to Email</a> -->
+                <a class="nav-link" href="#"><i class="fas fa-ellipsis-h"></i></a> 
+            </nav> 
+        </div>
+
+        <div class="tab-content border border-top-0 p-3" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <h5>Home Tab</h5>
+                <p>Konten tab Home di sini.</p>
+            </div>
+
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <h5>Profile Tab</h5>
+                <p>Konten tab Profile di sini.</p>
+            </div>
+
+            <div class="tab-pane fade" id="action" role="tabpanel" aria-labelledby="dropdownMenu">
+                <h5>Action Tab</h5>
+                <p>Konten tab dari dropdown “Action”.</p>
+            </div>
+        </div>
+
+        <div class="az-content-label mg-b-5">Form Input &amp; Textarea</div>
+        <p class="mg-b-20">A basic form control input and textarea with disabled and readonly mode.</p>
+
+        <div class="row row-sm">
+            <div class="col-lg ">
+                <div class="card card-dashboard-twelve">
+                    
+                    
+                    <div class="card-header d-flex align-items-center">
+                        <div>
+                            <!-- <h6 class="card-title">Website Audience Metrics</h6>
+                            <p class="card-text">Audience to which the users belonged while on the current date range.</p> -->
+                            
+                        </div>
+                        <!-- <div class="btn-group ml-auto">
+                            <button class="btn btn-info">Save</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </div> -->
+                        <div class="btn-group ml-auto">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <div class="card-body-top">
+                            <div>
+                            <label class="mg-b-0">Users</label>
+                            <h2>13,956</h2>
+                            </div>
+                            <div>
+                            <label class="mg-b-0">Bounce Rate</label>
+                            <h2>33.50%</h2>
+                            </div>
+                            <div>
+                            <label class="mg-b-0">Page Views</label>
+                            <h2>83,123</h2>
+                            </div>
+                            <div>
+                            <label class="mg-b-0">Sessions</label>
+                            <h2>16,869</h2>
+                        </div> -->
+                        {{ form.as_p }}
+                    </div><!-- card-body-top -->
+                    </div><!-- card-body -->
+                </div><!-- card -->
+                
+            </div><!-- col -->
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

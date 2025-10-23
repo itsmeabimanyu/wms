@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import (
     TemplateView
 )
@@ -78,7 +78,31 @@ class CreateWarehouse(TemplateView):
         ]
 
         context['form'] = WarehouseForm
-
         context['menu_sections'] = menu_sections
+        context['navlink'] = f"""
+            
+            <button type="submit" name="action" value="save" class="nav-link btn btn-link text-info">
+                <i class="far fa-save"></i> Save
+            </button>
+            <button type="submit" name="action" value="edit" class="nav-link btn btn-link disabled">
+                <i class="far fa-edit"></i> Edit
+            </button>
+            <button type="submit" name="action" value="copy" class="nav-link btn btn-link disabled">
+                <i class="far fa-copy"></i> Copy
+            </button>
+            <button type="submit" name="action" value="view" class="nav-link btn btn-link disabled">
+                <i class="far fa-copy"></i> View
+            </button>
+        """
 
         return context
+    
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action')
+
+        if action == 'save':
+            form = WarehouseForm(request.POST)
+            if form.is_valid():
+                 form.save()
+
+        return redirect(self.request.META.get('HTTP_REFERER'))
