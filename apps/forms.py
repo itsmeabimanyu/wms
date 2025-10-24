@@ -8,37 +8,24 @@ class WarehouseForm(forms.ModelForm):
             'code', 'name', 'capacity',
             'address', 'phone_number', 'email'
         ]
-        widgets = {
-            'code': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter warehouse code',
-            }),
-            'name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter warehouse name',
-            }),
-            'capacity': forms.NumberInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter warehouse capacity',
-            }),
-            'address': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 3,
-                'placeholder': 'Enter warehouse address',
-            }),
-            'phone_number': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter contact phone number',
-            }),
-            'email': forms.EmailInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter contact email address',
-            }),
-        }
+
 
     def __init__(self, *args, **kwargs):
+        # instance = kwargs.get('instance', None)
         super().__init__(*args, **kwargs)
-        # Tambahkan atribut Parsley jika kamu pakai validasi client-side
+
         for field_name, field in self.fields.items():
-            if field.widget.__class__.__name__ != 'CheckboxInput':
-                field.widget.attrs['data-parsley-validate'] = ''
+            field.widget.attrs['autocomplete'] = 'off'
+            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['placeholder'] = f'Enter warehouse {field.label.lower()}'
+
+            if field_name == 'address':
+                field.widget.attrs['rows'] = 3
+
+        # Prefill tanggal kontrak jika instance dan kontraknya ada
+        """if instance:
+            kontrak = instance.masa_kontrak.order_by('-tgl_mulai_kontrak').first()
+            if kontrak:
+                self.fields['tgl_mulai_kontrak'].initial = kontrak.tgl_mulai_kontrak.strftime('%d-%m-%Y')
+                self.fields['tgl_akhir_kontrak'].initial = kontrak.tgl_akhir_kontrak.strftime('%d-%m-%Y')
+        """
